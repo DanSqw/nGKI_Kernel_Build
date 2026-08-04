@@ -1,4 +1,4 @@
-name: Build Nothing Phone 1 (LineageOS A16)
+name: Build Nothing Phone 1 (LineageOS 23.2 A16)
 
 on:
   workflow_call:
@@ -94,7 +94,7 @@ env:
 
 jobs:
   build-kernel:
-    name: Nothing Phone 1 (LineageOS A16)
+    name: Nothing Phone 1 (LineageOS 23.2 A16)
     runs-on: ubuntu-latest # u can changed to ubuntu 22.04, and need container set ubuntu-latest
     # container: archlinux/archlinux:latest # if u need use arch linux -> archlinux/archlinux:latest or ubuntu 20.04 -> ubuntu:focal
     env:
