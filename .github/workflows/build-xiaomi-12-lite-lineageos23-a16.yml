@@ -123,7 +123,7 @@ jobs:
           # Only ${{ env.DEVICE_NAME }} use it.
           cd $GITHUB_WORKSPACE/device_kernel
 
-          git clone https://github.com/maxsteeel/nomount.git
+          git clone https://github.com/maxsteeel/nomount.git -b dev
           cp nomount/kernel/patches/nomount_5.4_kernel_integration.patch ./
           patch -p1 < nomount_5.4_kernel_integration.patch || true
 
