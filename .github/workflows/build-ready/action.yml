@@ -253,7 +253,7 @@ runs:
         run: |
           cd $GITHUB_WORKSPACE/device_kernel/drivers/kernelsu
 
-          if [[ "${{ env.KERNELSU_SOURCE }}" == *SukiSU* ]] || [[ "${{ env.KERNELSU_AUTO_FORK }}" == "sukisu" ]]; then
+          if [[ "${{ env.KERNELSU_SOURCE }}" == *SukiSU-Ultra* ]] || [[ "${{ env.KERNELSU_AUTO_FORK }}" == "sukisu" ]]; then
             sed -i -e '/ksu_selinux_hide_handle_post_fs_data();/i #if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 10, 0)' -e '/ksu_selinux_hide_handle_post_fs_data();/a #endif' runtime/ksud.c
             sed -i -e '/ksu_selinux_hide_handle_second_stage();/i #if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 10, 0)' -e '/ksu_selinux_hide_handle_second_stage();/a #endif' runtime/ksud.c
             sed -E -i -e 's/^static inline struct user_arg_ptr \*user_arg_null_ptr\(void\)$/static inline struct user_arg_ptr user_arg_null_ptr(void)/' -e 's/^    return &null_arg;$/    return null_arg;/' sulog/event.c
@@ -308,7 +308,7 @@ runs:
 
           }
 
-          if [[ "${{ env.KERNELSU_SOURCE }}" == *SukiSU* ]] || [[ "${{ env.KERNELSU_AUTO_FORK }}" == "sukisu" ]] && [[ "${{ env.KPM_INLINE }}" == "true" ]]; then
+          if [[ "${{ env.KERNELSU_SOURCE }}" == *SukiSU-Ultra* ]] || [[ "${{ env.KERNELSU_AUTO_FORK }}" == "sukisu" ]] && [[ "${{ env.KPM_INLINE }}" == "true" ]]; then
             echo "[+] Detected SukiSU-Ultra and enabled KPM Inline."
             ENABLE_KPM_CONFIGS
 
@@ -324,7 +324,7 @@ runs:
 
             fi
 
-          elif [[ "${{ env.KERNELSU_SOURCE }}" != *SukiSU* ]] || [[ "${{ env.KERNELSU_AUTO_FORK }}" != "sukisu" ]] && [[ "${{ env.KPM_INLINE }}" == "true" ]]; then
+          elif [[ "${{ env.KERNELSU_SOURCE }}" != *SukiSU-Ultra* ]] || [[ "${{ env.KERNELSU_AUTO_FORK }}" != "sukisu" ]] && [[ "${{ env.KPM_INLINE }}" == "true" ]]; then
             echo "[-] Your KernelSU Fork could not support KPM Inline!"
             false
 
