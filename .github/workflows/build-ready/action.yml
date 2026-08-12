@@ -275,7 +275,7 @@ runs:
             sed -n '/^config KALLSYMS_ALL/,/^[^ \t]/p' init/Kconfig | grep -q 'depends on.*DEBUG_KERNEL' && echo "CONFIG_DEBUG_KERNEL=y" >> ./arch/${{ env.KERNEL_ARCH }}/configs/${{ env.DEFCONFIG_NAME }}
             echo "CONFIG_KALLSYMS=y" >> ./arch/${{ env.KERNEL_ARCH }}/configs/${{ env.DEFCONFIG_NAME }}
             echo "CONFIG_KALLSYMS_ALL=y" >> ./arch/${{ env.KERNEL_ARCH }}/configs/${{ env.DEFCONFIG_NAME }}
-
+            echo "CONFIG_KPM=y" >> ./arch/${{ env.KERNEL_ARCH }}/configs/${{ env.DEFCONFIG_NAME }}
           }
 
           GET_KPM_TOOLS(){
@@ -308,7 +308,7 @@ runs:
 
           }
 
-          if [[ "${{ env.KERNELSU_SOURCE }}" == *SukiSU* ]] || [[ "${{ env.KERNELSU_AUTO_FORK }}" == "sukisu" ]] && [[ "${{ env.KPM_INLINE }}" == "true" ]]; then
+          if [[ "${{ env.KPM_INLINE }}" == "true" ]] && { [[ "${{ env.KERNELSU_SOURCE }}" == *SukiSU* ]] || [[ "${{ env.KERNELSU_AUTO_FORK }}" == "sukisu" ]]; }; then
             echo "[+] Detected SukiSU-Ultra and enabled KPM Inline."
             ENABLE_KPM_CONFIGS
 
@@ -324,7 +324,7 @@ runs:
 
             fi
 
-          elif [[ "${{ env.KERNELSU_SOURCE }}" != *SukiSU* ]] || [[ "${{ env.KERNELSU_AUTO_FORK }}" != "sukisu" ]] && [[ "${{ env.KPM_INLINE }}" == "true" ]]; then
+          elif [[ "${{ env.KPM_INLINE }}" == "true" ]] && { [[ "${{ env.KERNELSU_SOURCE }}" != *SukiSU* ]] && [[ "${{ env.KERNELSU_AUTO_FORK }}" != "sukisu" ]]; }; then
             echo "[-] Your KernelSU Fork could not support KPM Inline!"
             false
 
